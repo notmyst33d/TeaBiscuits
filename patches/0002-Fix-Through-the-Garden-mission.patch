@@ -1,0 +1,34 @@
+From b0a5e8b945094770c33b86a85af136659d43d220 Mon Sep 17 00:00:00 2001
+From: Myst33d <notmyst33d@gmail.com>
+Date: Sat, 25 Nov 2023 17:34:50 +0600
+Subject: [PATCH 2/3] Fix "Through the Garden" mission
+
+---
+ src/MisionManager.cs | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/src/MisionManager.cs b/src/MisionManager.cs
+index f689937..af3b3ed 100644
+--- a/src/MisionManager.cs
++++ b/src/MisionManager.cs
+@@ -73,6 +73,17 @@ public class MisionManager : Manager
+ 
+ 	public void StartMision(string misionName, MisionDataScriptableObject mision)
+ 	{
++		// TeaBiscuits: Fix "Through the Garden" mission.
++		// Assets have:
++		//     float m_minDialogTime = 1
++		//     float m_maxDialogTime = 2
++		// Which is obviously wrong, so let's fix it.
++		if (mision.m_misionName == "Through the Garden") {
++			Debug.Log("TeaBiscuits: Applying \"Through the Garden\" mission fix");
++			mision.m_minDialogTime = 30;
++			mision.m_maxDialogTime = 35;
++		}
++
+ 		_playersOnSpot = false;
+ 		_currentMision = mision;
+ 		switch (_currentMision.m_misionType)
+-- 
+2.43.0
+

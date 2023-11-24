@@ -1,0 +1,59 @@
+From 921afe75fdcd65061831b0f0b49aeffcefaa8910 Mon Sep 17 00:00:00 2001
+From: Myst33d <notmyst33d@gmail.com>
+Date: Sun, 26 Nov 2023 21:18:52 +0600
+Subject: [PATCH 3/3] Add keyboard support
+
+---
+ src/InputManager.cs | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+
+diff --git a/src/InputManager.cs b/src/InputManager.cs
+index 83735e8..ad3786a 100644
+--- a/src/InputManager.cs
++++ b/src/InputManager.cs
+@@ -61,6 +61,31 @@ public class InputManager : Manager
+ 	public override void Initialize(params object[] parameters)
+ 	{
+ 		base.Initialize(parameters);
++
++		// TeaBiscuits: Add bindings for keyboard
++		PlayerInput playerInput = m_playerInputPrefab.GetComponentInChildren<PlayerInput>();
++		playerInput.actions["HorizontalMovement"].AddCompositeBinding("1DAxis")
++			.With("Positive", "<Keyboard>/d")
++			.With("Negative", "<Keyboard>/a");
++
++		playerInput.actions["VerticalMovement"].AddCompositeBinding("1DAxis")
++			.With("Positive", "<Keyboard>/w")
++			.With("Negative", "<Keyboard>/s");
++
++		playerInput.actions["DPad"].AddCompositeBinding("2DVector")
++			.With("Up", "<Keyboard>/w")
++			.With("Down", "<Keyboard>/s")
++			.With("Left", "<Keyboard>/a")
++			.With("Right", "<Keyboard>/d");
++
++		playerInput.actions["JumpButton"].AddBinding("<Keyboard>/space");
++		playerInput.actions["UI_Submit"].AddBinding("<Keyboard>/space");
++		playerInput.actions["StartButton"].AddBinding("<Keyboard>/escape");
++		playerInput.actions["Cancel_UI"].AddBinding("<Keyboard>/escape");
++		playerInput.actions["BackButton"].AddBinding("<Keyboard>/f");
++		playerInput.actions["ActionButton"].AddBinding("<Keyboard>/e");
++		playerInput.actions["ButtonNorth"].AddBinding("<Keyboard>/g");
++
+ 		_previousState = true;
+ 		_currentUsers = 0;
+ 		_gameplayScene = false;
+@@ -382,6 +407,10 @@ public class InputManager : Manager
+ 		{
+ 			return false;
+ 		}
++		// TeaBiscuits: Make keyboard usable
++		if (device.name == "Keyboard") {
++			return true;
++		}
+ 		if (m_playerInputPrefab == null)
+ 		{
+ 			return true;
+-- 
+2.43.0
+
