@@ -31,5 +31,6 @@ Prerequisites:
 
 1. Disassemble original Assembly-CSharp.dll using ILSpy and save all code in the `src` folder
 2. Apply patches from `patches` folder
-3. Run `build-vanilla.sh`
-4. The built DLL should be in `win-x64` folder
+3. Copy `(Game Folder)/Project biscuits_Data/Managed` folder besides the `TeaBiscuit` folder
+4. Run `build-vanilla.sh`
+5. The built DLL should be in `win-x64` folder
