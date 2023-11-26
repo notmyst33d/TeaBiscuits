@@ -9,6 +9,14 @@ Because nobody else made the day one patch
 * Subtitles no longer have fade animation
 * Subtitles stay for extra 2 seconds after audio has finised
 
+## Keyboard Bindings
+WASD - General movement (Same as left thumb stick and D-Pad)  
+Space - UI Accept and Jump (Same as A button)  
+E - Interact (Same as X button)  
+F - Kick (Same as B button)  
+G - Game Wheel (Same as Y button)  
+Escape - UI Cancel and Pause (Same as Start button)
+
 ## Installing (for end users)
 1. Go to Releases
 2. Download the latest DLL and rename it to Assembly-CSharp.dll
